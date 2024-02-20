@@ -7,7 +7,7 @@ public class Funcionario {
     public double salarioBruto;
 
     public String mostrarDados() {
-        return ("\n Código: " + this.codigoFunc + "\tNome: " + this.nome + "\tCargo: " + this.cargo
+        return ("\nCódigo: " + this.codigoFunc + "\tNome: " + this.nome + "\tCargo: " + this.cargo
                 + "\tSalário bruto: R$ " + this.salarioBruto);
     }
 
