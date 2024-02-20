@@ -6,16 +6,21 @@ public class Conta {
     public int numConta;
     public double saldo;
 
-    public String exibirSaldo() {
+    public String exibirDados() {
         return ("\nTitular: " + this.nomeTitular + "\tAgência: " + this.numAgencia + "\tConta: " + this.numConta
                 + "\tSaldo: R$ " + this.saldo);
     }
 
-    public void realizarSaque(double valorSaque) {
+    public String exibirSaldo() {
+        return ("\nSaldo atual: R$ " + this.saldo);
+    }
+
+    public boolean realizarSaque(double valorSaque) {
         if (valorSaque > this.saldo) {
-            System.out.println("Saldo insuficiente para realizar esta operação!");
+            return false;
         } else {
             this.saldo -= valorSaque;
+            return true;
         }
     }
 
