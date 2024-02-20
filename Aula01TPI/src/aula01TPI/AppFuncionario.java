@@ -1,13 +1,21 @@
 package aula01TPI;
 
+import java.util.Scanner;
+
 public class AppFuncionario {
     public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
         Funcionario f = new Funcionario();
-        double aliquotaInss = 12;
-        f.codigoFunc = 1;
-        f.nome = "Toninho";
-        f.cargo = "Zelador";
-        f.salarioBruto = 2824.00;
+        
+        f.codigoFunc = f.geraCodigo();
+        System.out.print("Digite o nome do funcionário: ");
+        f.nome = entrada.next();
+        System.out.print("Digite o cargo do funcionário: ");
+        f.cargo = entrada.next();
+        System.out.print("Digite o salário do funcionário: ");
+        f.salarioBruto = entrada.nextDouble();
+        System.out.print("Digite a alíquota de INSS em %: ");
+        double aliquotaInss = entrada.nextDouble();
 
         System.out.println(f.mostrarDados());
         
