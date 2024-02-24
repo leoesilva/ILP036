@@ -3,34 +3,102 @@ package bancoAula01;
 import java.util.Scanner;
 
 public class AppBanco {
+    public static Scanner entrada = new Scanner(System.in);
+    public static Conta[] contas = new Conta[2];
+
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
-        Conta c = new Conta();
-        double valorOperacao = 0;
+        criarContas();
+        selecionarOpcoes();
+    }
 
-        System.out.print("Digite o nome do titular: ");
-        c.nomeTitular = entrada.next();
-        System.out.print("Digite o número da agência: ");
-        c.numAgencia = entrada.nextInt();
+    private static void criarContas() {
+        Conta conta1 = new Conta();
+        conta1.nomeTitular = "José";
+        conta1.numConta = 1;
+        contas[0] = conta1;
+
+        Conta conta2 = new Conta();
+        conta2.nomeTitular = "Maria";
+        conta2.numConta = 2;
+        contas[1] = conta2;
+    }
+
+    private static void consultarSaldo() {
         System.out.print("Digite o número da conta: ");
-        c.numConta = entrada.nextInt();
-
-        System.out.println(c.exibirDados());
-
-        System.out.print("Digite um valor para depositar: ");
-        valorOperacao = entrada.nextDouble();  
-        c.realizarDeposito(valorOperacao);
-        System.out.println("Depósito realizado com sucesso!");
-        System.out.println(c.exibirSaldo());
-
-        System.out.print("Digite um valor para sacar: ");
-        valorOperacao = entrada.nextDouble();
-        if (c.realizarSaque(valorOperacao)) {
-            System.out.println("Saque realizado com sucesso!");
+        int numConta = entrada.nextInt();
+        for (Conta conta : contas) {
+            if (conta.numConta == numConta) {
+                Conta c = conta;
+                System.out.println(c.exibirDados());
+            }
         }
-        else {
-            System.out.println("ERRO! Saldo insuficiente para realizar essa operação.");
-        }        
-        System.out.println(c.exibirSaldo());        
+    }
+
+    private static void realizarDeposito() {
+        System.out.print("Digite o número da conta: ");
+        int numConta = entrada.nextInt();
+        for (Conta conta : contas) {
+            if (conta.numConta == numConta) {
+                Conta c = conta;
+                double valorOperacao = 0;
+                System.out.print("Digite um valor para depositar: ");
+                valorOperacao = entrada.nextDouble();
+                c.realizarDeposito(valorOperacao);
+                System.out.println("Depósito realizado com sucesso!");
+            }
+        }
+    }
+
+    private static void realizarSaque() {
+        System.out.print("Digite o número da conta: ");
+        int numConta = entrada.nextInt();
+        for (Conta conta : contas) {
+            if (conta.numConta == numConta) {
+                Conta c = conta;
+                double valorOperacao = 0;
+                System.out.print("Digite um valor para sacar: ");
+                valorOperacao = entrada.nextDouble();
+                if (c.realizarSaque(valorOperacao)) {
+                    System.out.println("Saque realizado com sucesso!");
+                } else {
+                    System.out.println("ERRO! Saldo insuficiente para realizar essa operação.");
+                }
+                System.out.println(c.exibirSaldo());
+            }
+        }
+    }
+
+    private static void encerraPrograma() {
+        System.out.println("Até logo!");
+        System.exit(0);
+    }
+
+    private static void selecionarOpcoes() {
+        do {
+            System.out.println("**\tCaixa eletrônico\t**");
+            System.out.println("Selecione uma das opções abaixo:");
+            System.out.println("\t1 - Consultar saldo");
+            System.out.println("\t2 - Realizar depósito");
+            System.out.println("\t3 - Realizar saque");
+            System.out.println("\t0 - Sair");
+            int opcao = entrada.nextInt();
+            switch (opcao) {
+                case 1:
+                    consultarSaldo();
+                    break;
+                case 2:
+                    realizarDeposito();
+                    break;
+                case 3:
+                    realizarSaque();
+                    break;
+                case 0:
+                    encerraPrograma();
+                    break;
+                default:
+                    System.out.println("ERRO! Opção inválida");
+                    break;
+            }
+        } while (true);
     }
 }

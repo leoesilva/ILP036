@@ -2,12 +2,11 @@ package bancoAula01;
 
 public class Conta {
     public String nomeTitular;
-    public int numAgencia;
     public int numConta;
     public double saldo;
 
     public String exibirDados() {
-        return ("\nTitular: " + this.nomeTitular + "\tAgência: " + this.numAgencia + "\tConta: " + this.numConta
+        return ("\nTitular: " + this.nomeTitular + "\tConta: " + this.numConta
                 + "\tSaldo: R$ " + this.saldo);
     }
 
