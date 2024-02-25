@@ -28,12 +28,12 @@ public class Conta {
     }
 
     public boolean realizarTransferencia(Conta contaDestino, double valorTransferencia) {
-        if (this.saldo >= valorTransferencia) {
+        if (valorTransferencia > this.saldo) {            
+            return false;
+        } else {
             this.saldo -= valorTransferencia;
             contaDestino.saldo += valorTransferencia;
             return true;
-        } else {
-            return false;
         }
     }
 }
