@@ -26,4 +26,14 @@ public class Conta {
     public void realizarDeposito(double valorDeposito) {
         this.saldo += valorDeposito;
     }
+
+    public boolean realizarTransferencia(Conta contaDestino, double valorTransferencia) {
+        if (this.saldo >= valorTransferencia) {
+            this.saldo -= valorTransferencia;
+            contaDestino.saldo += valorTransferencia;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
