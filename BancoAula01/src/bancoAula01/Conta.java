@@ -7,11 +7,11 @@ public class Conta {
 
     public String exibirDados() {
         return ("\nTitular: " + this.nomeTitular + "\tConta: " + this.numConta
-                + "\tSaldo: R$ " + String.format("%.2f", this.saldo));
+                + "\tSaldo: R$ " + String.format("%.2f", this.exibirSaldo()));
     }
 
-    public String exibirSaldo() {
-        return ("\nSaldo atual: R$ " + String.format("%.2f", this.saldo));
+    public double exibirSaldo() {
+        return this.saldo;
     }
 
     public boolean realizarSaque(double valorSaque) {

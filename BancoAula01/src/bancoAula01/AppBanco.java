@@ -83,7 +83,7 @@ public class AppBanco {
         } else {
             System.out.println("ERRO! Saldo insuficiente para realizar essa operação.");
         }
-        System.out.println(c.exibirSaldo());
+        System.out.println("Saldo atual: R$ " + String.format("%.2f", c.exibirSaldo()));
     }
 
     private static void realizarTransferencia() {
@@ -125,7 +125,7 @@ public class AppBanco {
 
         if (cOrigem.realizarTransferencia(cDestino, valorOperacao)) {
             System.out.println("Transferência realizada com sucesso!");
-            System.out.println(cOrigem.exibirSaldo());
+            System.out.println("Saldo atual: R$ " + String.format("%.2f", cOrigem.exibirSaldo()));
         } else {
             System.out.println("ERRO! Saldo insuficiente para realizar essa operação.");
         }
