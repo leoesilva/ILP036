@@ -16,10 +16,11 @@ public class Funcionario {
 
     public String mostrarDados() {
         return ("\nCódigo: " + this.codigoFunc + "\tNome: " + this.nome + "\tCargo: " + this.cargo
-                + "\tSalário bruto: R$ " + this.salarioBruto);
+                + "\tSalário bruto: R$ " + String.format("%.2f", this.salarioBruto));
     }
 
     public double calculaSalarioLiquido(double percentualDescontoInss) {
-        return this.salarioBruto - (this.salarioBruto * (percentualDescontoInss / 100));
+        double salarioLiquido = this.salarioBruto - (this.salarioBruto * (percentualDescontoInss / 100));
+        return salarioLiquido;
     }
 }
