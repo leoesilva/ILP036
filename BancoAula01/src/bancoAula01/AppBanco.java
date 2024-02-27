@@ -145,6 +145,7 @@ public class AppBanco {
             System.out.println("\t3 - Realizar saque");
             System.out.println("\t4 - Realizar transferência");
             System.out.println("\t0 - Sair");
+            System.out.print("Digite a opção selecionada: ");
             int opcao = entrada.nextInt();
             switch (opcao) {
                 case 1:

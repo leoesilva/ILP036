@@ -7,11 +7,11 @@ public class Conta {
 
     public String exibirDados() {
         return ("\nTitular: " + this.nomeTitular + "\tConta: " + this.numConta
-                + "\tSaldo: R$ " + this.saldo);
+                + "\tSaldo: R$ " + String.format("%.2f", this.saldo));
     }
 
     public String exibirSaldo() {
-        return ("\nSaldo atual: R$ " + this.saldo);
+        return ("\nSaldo atual: R$ " + String.format("%.2f", this.saldo));
     }
 
     public boolean realizarSaque(double valorSaque) {
@@ -31,8 +31,8 @@ public class Conta {
         if (valorTransferencia > this.saldo) {            
             return false;
         } else {
-            this.saldo -= valorTransferencia;
-            contaDestino.saldo += valorTransferencia;
+            this.realizarSaque(valorTransferencia);
+            contaDestino.realizarDeposito(valorTransferencia);
             return true;
         }
     }
