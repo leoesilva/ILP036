@@ -2,7 +2,7 @@ package bancoAula01;
 
 import java.util.Scanner;
 
-public class AppBanco {
+public class App {
     public static Scanner entrada = new Scanner(System.in);
     public static Conta[] contas = new Conta[2];
 
@@ -54,7 +54,6 @@ public class AppBanco {
             System.out.println("Conta não encontrada.");
             return;
         }
-
         System.out.print("Digite um valor para depositar: ");
         double valorOperacao = entrada.nextDouble();
         c.realizarDeposito(valorOperacao);
@@ -75,7 +74,6 @@ public class AppBanco {
             System.out.println("Conta não encontrada.");
             return;
         }
-
         System.out.print("Digite um valor para sacar: ");
         double valorOperacao = entrada.nextDouble();
         if (c.realizarSaque(valorOperacao)) {
@@ -100,7 +98,6 @@ public class AppBanco {
             System.out.println("Conta de origem não encontrada.");
             return;
         }
-
         System.out.print("Digite o número da conta de destino: ");
         int numContaDestino = entrada.nextInt();
         Conta cDestino = null;
@@ -119,10 +116,8 @@ public class AppBanco {
             System.out.println("ERRO! A conta de origem e destino são iguais. Transferência não permitida.");
             return;
         }
-
         System.out.print("Digite o valor a ser transferido: ");
         double valorOperacao = entrada.nextDouble();
-
         if (cOrigem.realizarTransferencia(cDestino, valorOperacao)) {
             System.out.println("Transferência realizada com sucesso!");
         } else {
