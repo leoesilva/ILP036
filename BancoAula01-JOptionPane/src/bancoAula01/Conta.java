@@ -4,10 +4,14 @@ public class Conta {
     public int numConta;
     public Cliente titular = new Cliente();
     public double saldo;
+    
+    public Conta() {
 
-    public String exibirDados() {
-        return ("Titular: " + this.titular.nome + "\nConta: " + this.numConta
-                + "\nSaldo: R$ " + String.format("%.2f", this.exibirSaldo()));
+    }
+
+    public Conta(int numConta, String nomeCliente, String cpfCliente) {
+        this.numConta = numConta;
+        this.titular = new Cliente(nomeCliente, cpfCliente);
     }
 
     public double exibirSaldo() {
@@ -35,5 +39,14 @@ public class Conta {
             contaDestino.realizarDeposito(valorTransferencia);
             return true;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.titular).append("\n");
+        sb.append("Núm. conta: ").append(this.numConta).append("\n");
+        sb.append("Saldo: R$ ").append(String.format("%.2f", saldo));
+        return sb.toString();
     }
 }
