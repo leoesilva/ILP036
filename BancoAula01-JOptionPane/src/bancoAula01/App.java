@@ -5,22 +5,15 @@ import javax.swing.JOptionPane;
 
 public class App {
     public static ArrayList<Conta> contas = new ArrayList<Conta>();
+    public static int numeradorConta = 1;
 
     public static void main(String[] args) {
-        selecionarOpcao();
-    }
-
-    private static void criarConta() {
-        int numConta = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta:"));
-        String nomeCliente = JOptionPane.showInputDialog("Digite o nome do cliente:");
-        String cpfCliente = JOptionPane.showInputDialog("Digite o CPF do cliente:");
-        Conta c = new Conta(numConta, nomeCliente, cpfCliente);
-        contas.add(c);
-        JOptionPane.showMessageDialog(null, c);
+        menuBanco();
     }
 
     private static void consultarConta() {
-        int numConta = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta:"));
+        int numConta = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da conta:",
+                "CONSULTAR CONTA", JOptionPane.QUESTION_MESSAGE));
         Conta c = null;
         for (Conta conta : contas) {
             if (conta.numConta == numConta) {
@@ -29,14 +22,15 @@ public class App {
             }
         }
         if (c == null) {
-            JOptionPane.showMessageDialog(null, "Conta não encontrada.");
+            JOptionPane.showMessageDialog(null, "Conta não encontrada.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(null, c);
+        JOptionPane.showMessageDialog(null, c, "CONSULTAR CONTA", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private static void realizarDeposito() {
-        int numConta = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta:"));
+        int numConta = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da conta:",
+                "REALIZAR DEPÓSITO", JOptionPane.QUESTION_MESSAGE));
         Conta c = null;
         for (Conta conta : contas) {
             if (conta.numConta == numConta) {
@@ -45,16 +39,17 @@ public class App {
             }
         }
         if (c == null) {
-            JOptionPane.showMessageDialog(null, "Conta não encontrada.");
+            JOptionPane.showMessageDialog(null, "Conta não encontrada.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        double valorOperacao = Double.parseDouble(JOptionPane.showInputDialog("Digite um valor para depositar:"));
+        double valorOperacao = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite um valor para depositar:", "REALIZAR DEPÓSITO", JOptionPane.QUESTION_MESSAGE));
         c.realizarDeposito(valorOperacao);
-        JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!", "REALIZAR DEPÓSITO", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private static void realizarSaque() {
-        int numConta = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta:"));
+        int numConta = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da conta:", "REALIZAR SAQUE",
+                JOptionPane.QUESTION_MESSAGE));
         Conta c = null;
         for (Conta conta : contas) {
             if (conta.numConta == numConta) {
@@ -63,20 +58,21 @@ public class App {
             }
         }
         if (c == null) {
-            JOptionPane.showMessageDialog(null, "Conta não encontrada.");
+            JOptionPane.showMessageDialog(null, "Conta não encontrada.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
             return;
         }
         double valorOperacao = Double.parseDouble(JOptionPane.showInputDialog("Digite um valor para sacar:"));
         if (c.realizarSaque(valorOperacao)) {
-            JOptionPane.showMessageDialog(null, "Saque realizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Saque realizado com sucesso!", "REALIZAR SAQUE", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "ERRO! Saldo insuficiente para realizar essa operação.");
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar essa operação.", "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, "Saldo atual: R$ " + String.format("%.2f", c.exibirSaldo()));
+        JOptionPane.showMessageDialog(null, "Saldo atual: R$ " + String.format("%.2f", c.exibirSaldo()), "REALIZAR SAQUE", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private static void realizarTransferencia() {
-        int numContaOrigem = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta de origem:"));
+        int numContaOrigem = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da conta de origem:", "REALIZAR TRANSFERÊNCIA", JOptionPane.QUESTION_MESSAGE));
         Conta cOrigem = null;
         for (Conta conta : contas) {
             if (conta.numConta == numContaOrigem) {
@@ -85,10 +81,10 @@ public class App {
             }
         }
         if (cOrigem == null) {
-            JOptionPane.showMessageDialog(null, "Conta de origem não encontrada.");
+            JOptionPane.showMessageDialog(null, "Conta de origem não encontrada.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        int numContaDestino = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta de destino:"));
+        int numContaDestino = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da conta de destino:", "REALIZAR TRANSFERÊNCIA", JOptionPane.QUESTION_MESSAGE));
         Conta cDestino = null;
         for (Conta conta : contas) {
             if (conta.numConta == numContaDestino) {
@@ -97,42 +93,51 @@ public class App {
             }
         }
         if (cDestino == null) {
-            JOptionPane.showMessageDialog(null, "Conta de destino não encontrada.");
+            JOptionPane.showMessageDialog(null, "Conta de destino não encontrada.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         if (cOrigem == cDestino) {
             JOptionPane.showMessageDialog(null,
-                    "ERRO! A conta de origem e destino são iguais. Transferência não permitida.");
+                    "A conta de origem e destino são iguais. Transferência não permitida.", "ERRO", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        double valorOperacao = Double.parseDouble(JOptionPane.showInputDialog("Digite um valor para transferir:"));
+        double valorOperacao = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite um valor para transferir:", "REALIZAR TRANSFERÊNCIA", JOptionPane.QUESTION_MESSAGE));
         if (cOrigem.realizarTransferencia(cDestino, valorOperacao)) {
-            JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!");
+            JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "REALIZAR TRANSFERÊNCIA", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "ERRO! Saldo insuficiente para realizar essa operação.");
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar essa operação.", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, "Saldo atual: R$ " + String.format("%.2f", cOrigem.exibirSaldo()));
+        JOptionPane.showMessageDialog(null, "Saldo atual: R$ " + String.format("%.2f", cOrigem.exibirSaldo()), "REALIZAR TRANSFERÊNCIA", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private static void criarConta() {
+        int numConta = numeradorConta++;
+        String nomeCliente = JOptionPane.showInputDialog(null, "Digite o nome do cliente:", "CRIAR NOVA CONTA", JOptionPane.QUESTION_MESSAGE);
+        String cpfCliente = JOptionPane.showInputDialog(null, "Digite o CPF do cliente:", "CRIAR NOVA CONTA", JOptionPane.QUESTION_MESSAGE);
+        Conta c = new Conta(numConta, nomeCliente, cpfCliente);
+        contas.add(c);
+        JOptionPane.showMessageDialog(null, c, "CONTA CRIADA", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private static void encerraPrograma() {
-        JOptionPane.showMessageDialog(null, "Até logo!");
+        JOptionPane.showMessageDialog(null, "Até logo!", "CAIXA ELETRÔNICO", JOptionPane.PLAIN_MESSAGE);
         System.exit(0);
     }
 
-    private static void selecionarOpcao() {
+    private static void menuBanco() {
         StringBuilder sb = new StringBuilder();
-        sb.append("CAIXA ELETRÔNICO\n\n");
-        sb.append("Selecione uma das opções abaixo:\n");
-        sb.append("\t1 - Consultar conta\n");
-        sb.append("\t2 - Realizar depósito\n");
-        sb.append("\t3 - Realizar saque\n");
-        sb.append("\t4 - Realizar transferência\n");
-        sb.append("\t5 - Criar nova conta\n");
-        sb.append("\t0 - Sair\n\n");
+        sb.append("Selecione uma das opções abaixo:").append("\n");
+        sb.append("1 - Consultar conta").append("\n");
+        sb.append("2 - Realizar depósito").append("\n");
+        sb.append("3 - Realizar saque").append("\n");
+        sb.append("4 - Realizar transferência").append("\n");
+        sb.append("5 - Criar nova conta").append("\n");
+        sb.append("0 - Sair").append("\n");
         sb.append("Digite a opção selecionada:");
         do {
-            int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, sb));
+            int opcao = Integer
+                    .parseInt(JOptionPane.showInputDialog(null, sb, "CAIXA ELETRÔNICO", JOptionPane.PLAIN_MESSAGE));
             switch (opcao) {
                 case 1:
                     consultarConta();
@@ -153,7 +158,7 @@ public class App {
                     encerraPrograma();
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "ERRO! Opção inválida");
+                    JOptionPane.showMessageDialog(null, "Opção inválida", "ERRO", JOptionPane.ERROR_MESSAGE);
                     break;
             }
         } while (true);
