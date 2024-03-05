@@ -12,12 +12,12 @@ public class App {
 
     private static void criarContas() {
         Conta conta1 = new Conta();
-        conta1.nomeTitular = "José";
+        conta1.titular.nome = "José";
         conta1.numConta = 1;
         contas[0] = conta1;
 
         Conta conta2 = new Conta();
-        conta2.nomeTitular = "Maria";
+        conta2.titular.nome = "Maria";
         conta2.numConta = 2;
         contas[1] = conta2;
     }

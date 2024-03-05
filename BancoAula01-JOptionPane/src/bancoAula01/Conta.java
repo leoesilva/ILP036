@@ -1,12 +1,12 @@
 package bancoAula01;
 
 public class Conta {
-    public String nomeTitular;
     public int numConta;
+    public Cliente titular = new Cliente();
     public double saldo;
 
     public String exibirDados() {
-        return ("Titular: " + this.nomeTitular + "\nConta: " + this.numConta
+        return ("Titular: " + this.titular.nome + "\nConta: " + this.numConta
                 + "\nSaldo: R$ " + String.format("%.2f", this.exibirSaldo()));
     }
 
