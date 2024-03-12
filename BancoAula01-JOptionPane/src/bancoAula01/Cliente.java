@@ -1,13 +1,13 @@
 package bancoAula01;
 
 public class Cliente {
-    public static int numeradorCliente = 1;    
-    public int id;
-    public String nome;
-    public String cpf;
+    static int numeradorCliente = 1;
+    private int id;
+    private String nome;
+    private String cpf;
 
     public Cliente() {
-
+        this.id = numeradorCliente++;
     }
 
     public Cliente(String nome) {
@@ -18,6 +18,26 @@ public class Cliente {
     public Cliente(String nome, String cpf) {
         this.id = numeradorCliente++;
         this.nome = nome;
+        this.cpf = cpf;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
