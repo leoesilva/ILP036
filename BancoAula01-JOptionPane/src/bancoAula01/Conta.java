@@ -1,18 +1,22 @@
 package bancoAula01;
 
 public class Conta {
-    static int numeradorConta = 1;
-    public int numConta;
-    public Cliente titular = new Cliente();
-    public double saldo;
+    private static int numeradorConta = 1;
+    private int numConta;
+    private Cliente titular;
+    private double saldo;
     
     public Conta() {
         this.numConta = numeradorConta++;
     }
 
-    public Conta(String nomeCliente, String cpfCliente) {
+    public Conta(Cliente titular) {
         this.numConta = numeradorConta++;
-        this.titular = new Cliente(nomeCliente, cpfCliente);
+        this.titular = titular;
+    }
+
+    static int getNumeradorConta() {
+        return numeradorConta - 1;
     }
 
     public int getNumConta() {

@@ -1,7 +1,7 @@
 package bancoAula01;
 
 public class Cliente {
-    static int numeradorCliente = 1;
+    private static int numeradorCliente = 1;
     private int id;
     private String nome;
     private String cpf;
@@ -19,6 +19,10 @@ public class Cliente {
         this.id = numeradorCliente++;
         this.nome = nome;
         this.cpf = cpf;
+    }
+
+    static int getNumeradorCliente() {
+        return numeradorCliente - 1;
     }
 
     public int getId() {

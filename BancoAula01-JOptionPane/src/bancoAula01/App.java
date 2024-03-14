@@ -15,7 +15,7 @@ public class App {
                 "CONSULTAR CONTA", JOptionPane.QUESTION_MESSAGE));
         Conta c = null;
         for (Conta conta : contas) {
-            if (conta.numConta == numConta) {
+            if (conta.getNumConta() == numConta) {
                 c = conta;
                 break;
             }
@@ -32,7 +32,7 @@ public class App {
                 "REALIZAR DEPÓSITO", JOptionPane.QUESTION_MESSAGE));
         Conta c = null;
         for (Conta conta : contas) {
-            if (conta.numConta == numConta) {
+            if (conta.getNumConta() == numConta) {
                 c = conta;
                 break;
             }
@@ -53,7 +53,7 @@ public class App {
                 JOptionPane.QUESTION_MESSAGE));
         Conta c = null;
         for (Conta conta : contas) {
-            if (conta.numConta == numConta) {
+            if (conta.getNumConta() == numConta) {
                 c = conta;
                 break;
             }
@@ -79,7 +79,7 @@ public class App {
                 "REALIZAR TRANSFERÊNCIA", JOptionPane.QUESTION_MESSAGE));
         Conta cOrigem = null;
         for (Conta conta : contas) {
-            if (conta.numConta == numContaOrigem) {
+            if (conta.getNumConta() == numContaOrigem) {
                 cOrigem = conta;
                 break;
             }
@@ -93,7 +93,7 @@ public class App {
                 "REALIZAR TRANSFERÊNCIA", JOptionPane.QUESTION_MESSAGE));
         Conta cDestino = null;
         for (Conta conta : contas) {
-            if (conta.numConta == numContaDestino) {
+            if (conta.getNumConta() == numContaDestino) {
                 cDestino = conta;
                 break;
             }
@@ -128,13 +128,26 @@ public class App {
                 JOptionPane.QUESTION_MESSAGE);
         String cpfCliente = JOptionPane.showInputDialog(null, "Digite o CPF do cliente:", "CRIAR NOVA CONTA",
                 JOptionPane.QUESTION_MESSAGE);
-        Conta c = new Conta(nomeCliente, cpfCliente);
+        Conta c = new Conta(new Cliente(nomeCliente, cpfCliente));
         contas.add(c);
         JOptionPane.showMessageDialog(null, c, "CONTA CRIADA", JOptionPane.INFORMATION_MESSAGE);
+        int depinicial = JOptionPane.showConfirmDialog(null, "Deseja realizar um depósito inicial?", "CRIAR NOVA CONTA",
+                JOptionPane.YES_NO_OPTION);
+        if (depinicial == 0) {
+            double valorOperacao = Double
+                    .parseDouble(JOptionPane.showInputDialog(null, "Digite um valor para depositar:",
+                            "REALIZAR DEPÓSITO", JOptionPane.QUESTION_MESSAGE));
+            c.realizarDeposito(valorOperacao);
+            JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!", "REALIZAR DEPÓSITO",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            return;
+        }
     }
 
     private static void listarContas() {
         StringBuilder sb = new StringBuilder();
+        sb.append("Quantidade de contas cadastradas: ").append(Conta.getNumeradorConta()).append("\n\n");
         for (Conta conta : contas) {
             sb.append("Número da conta: ").append(conta.getNumConta()).append(". ");
             sb.append("Nome do cliente: ").append(conta.getTitular().getNome()).append(". ");
@@ -149,7 +162,7 @@ public class App {
     }
 
     private static void encerrarPrograma() {
-        JOptionPane.showMessageDialog(null, "Até logo!", "CAIXA ELETRÔNICO", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Até logo!", "BANCO JAVA", JOptionPane.PLAIN_MESSAGE);
         System.exit(0);
     }
 
@@ -166,7 +179,7 @@ public class App {
         sb.append("Digite a opção selecionada:");
         do {
             int opcao = Integer
-                    .parseInt(JOptionPane.showInputDialog(null, sb, "CAIXA ELETRÔNICO", JOptionPane.PLAIN_MESSAGE));
+                    .parseInt(JOptionPane.showInputDialog(null, sb, "BANCO JAVA", JOptionPane.PLAIN_MESSAGE));
             switch (opcao) {
                 case 1:
                     consultarConta();
