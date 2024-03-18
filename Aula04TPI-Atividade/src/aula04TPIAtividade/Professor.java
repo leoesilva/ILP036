@@ -1,13 +1,11 @@
 package aula04TPIAtividade;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Professor {
     private String nome;
     private String titulacao;
     private int cargaHoraria;
-    private List<Disciplina> disciplinas;
     private static ArrayList<Professor> professores = new ArrayList<Professor>();
 
     public Professor(String nome, String titulacao, int cargaHoraria) {

@@ -1,7 +1,5 @@
 package aula04TPIAtividade;
 
-import java.util.Locale;
-
 import javax.swing.JOptionPane;
 
 public class App {
