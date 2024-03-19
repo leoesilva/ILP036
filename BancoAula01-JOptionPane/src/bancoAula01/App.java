@@ -128,7 +128,19 @@ public class App {
                 JOptionPane.QUESTION_MESSAGE);
         String cpfCliente = JOptionPane.showInputDialog(null, "Digite o CPF do cliente:", "CRIAR NOVA CONTA",
                 JOptionPane.QUESTION_MESSAGE);
-        Conta c = new Conta(new Cliente(nomeCliente, cpfCliente));
+        Conta c = null;
+        int tipoConta = Integer.parseInt(
+                JOptionPane.showInputDialog(null, "Escolha o tipo de conta:\n\n1 - Conta Corrente\n2 - Conta Limite"));
+        if (tipoConta == 1) {
+            Conta cc = new ContaCorrente(new Cliente(nomeCliente, cpfCliente));
+            c = cc;
+        } else if (tipoConta == 2) {
+            Conta cl = new ContaLimite(new Cliente(nomeCliente, cpfCliente), 200);
+            c = cl;
+        } else {
+            JOptionPane.showMessageDialog(null, "Opção inválida", "ERRO", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         contas.add(c);
         JOptionPane.showMessageDialog(null, c, "CONTA CRIADA", JOptionPane.INFORMATION_MESSAGE);
         int depinicial = JOptionPane.showConfirmDialog(null, "Deseja realizar um depósito inicial?", "CRIAR NOVA CONTA",
@@ -149,9 +161,10 @@ public class App {
         StringBuilder sb = new StringBuilder();
         sb.append("Quantidade de contas cadastradas: ").append(Conta.getNumeradorConta()).append("\n\n");
         for (Conta conta : contas) {
-            sb.append("Número da conta: ").append(conta.getNumConta()).append(". ");
-            sb.append("Nome do cliente: ").append(conta.getTitular().getNome()).append(". ");
+            sb.append("Número da conta: ").append(conta.getNumConta()).append("\n");
+            sb.append("Nome do cliente: ").append(conta.getTitular().getNome()).append("\n");
             sb.append("CPF: ").append(conta.getTitular().getCpf()).append(". \n");
+            sb.append("Total: R$ ").append(String.format("%.2f", conta.getSaldo())).append("\n\n");
         }
         if (sb.length() == 0) {
             JOptionPane.showMessageDialog(null, "Não há nenhuma conta cadastrada.", "LISTA DE CONTAS",
@@ -161,9 +174,11 @@ public class App {
         }
     }
 
-    private static void encerrarPrograma() {
-        JOptionPane.showMessageDialog(null, "Até logo!", "BANCO JAVA", JOptionPane.PLAIN_MESSAGE);
-        System.exit(0);
+    private static void testesFuncionarioGerente() {
+        Funcionario f = new Funcionario("Nelson", "11111111111", 1420);
+        Gerente g = new Gerente("Croc", "22222222222", 14200, 1234);
+        g.setNumeroFuncionariosGerenciados(1);
+        JOptionPane.showMessageDialog(null, f + "\n" + g);
     }
 
     private static void menuBanco() {
@@ -175,6 +190,7 @@ public class App {
         sb.append("4 - Realizar transferência").append("\n");
         sb.append("5 - Criar nova conta").append("\n");
         sb.append("6 - Listar todas as contas").append("\n");
+        sb.append("7 - Testes Funcionário e Gerente").append("\n");
         sb.append("0 - Sair").append("\n");
         sb.append("Digite a opção selecionada:");
         do {
@@ -199,8 +215,12 @@ public class App {
                 case 6:
                     listarContas();
                     break;
+                case 7:
+                    testesFuncionarioGerente();
+                    break;
                 case 0:
-                    encerrarPrograma();
+                    JOptionPane.showMessageDialog(null, "Até logo!", "BANCO JAVA", JOptionPane.PLAIN_MESSAGE);
+                    System.exit(0);
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida", "ERRO", JOptionPane.ERROR_MESSAGE);

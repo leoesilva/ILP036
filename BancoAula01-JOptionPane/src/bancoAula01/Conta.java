@@ -1,10 +1,10 @@
 package bancoAula01;
 
 public class Conta {
-    private static int numeradorConta = 1;
-    private int numConta;
-    private Cliente titular;
-    private double saldo;
+    protected static int numeradorConta = 1;
+    protected int numConta;
+    protected Cliente titular;
+    protected double saldo;
     
     public Conta() {
         this.numConta = numeradorConta++;
