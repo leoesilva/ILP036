@@ -1,22 +1,22 @@
 package bancoAula01;
 
 public class Conta {
-    protected static int numeradorConta = 1;
+    protected static int numeradorConta = 0;
     protected int numConta;
     protected Cliente titular;
     protected double saldo;
-    
+
     public Conta() {
-        this.numConta = numeradorConta++;
+        this.numConta = ++numeradorConta;
     }
 
     public Conta(Cliente titular) {
-        this.numConta = numeradorConta++;
+        this.numConta = ++numeradorConta;
         this.titular = titular;
     }
 
     static int getNumeradorConta() {
-        return numeradorConta - 1;
+        return numeradorConta;
     }
 
     public int getNumConta() {
@@ -53,7 +53,7 @@ public class Conta {
     }
 
     public boolean realizarTransferencia(Conta contaDestino, double valorTransferencia) {
-        if (valorTransferencia > this.saldo) {            
+        if (valorTransferencia > this.saldo) {
             return false;
         } else {
             this.realizarSaque(valorTransferencia);
@@ -64,10 +64,6 @@ public class Conta {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.titular).append("\n");
-        sb.append("Núm. conta: ").append(this.numConta).append("\n");
-        sb.append("Saldo: R$ ").append(String.format("%.2f", saldo));
-        return sb.toString();
+        return this.titular + "\nNúm. conta: " + this.numConta + "\nSaldo: R$ " + String.format("%.2f", this.saldo);
     }
 }
